@@ -1,5 +1,5 @@
 import pandas as pd
-import matplotlib.pyplot as pyplot
+import matplotlib.pyplot as plt
 
 #if __name__=="main":
 #Files paths
@@ -42,6 +42,66 @@ for i in df_PDA.index:
 df_PDA.rename(index=dict_PDA, inplace=True)
 
 
+#-------------------------------*************Doing the merge******************-------------------------------
+df=df_guru.append(df_PDA)
 
-print(df_PDA)
+
+#-------------------------------*************Working with dataset******************-------------------------------
+df[["Alcance","Calidad","Tiempo","Ppto"]]=df[["Alcance","Calidad","Tiempo","Ppto"]].astype(int)
+df[['Fecha Compromiso']]=df['Fecha Compromiso'].apply(pd.to_datetime)
+
+
+#-------------------------------*************Working only with important data******************-------------------------------
+df.notnull().sum()/df.shape[0]*100  #Table with the percentage of amount of complete
+df_analysis=df.drop(["Fecha Compromiso","Plan de Acción"], axis=1)
+
+"""
+Independent values
+.- Riesgo / Detonador
+.- Categoria
+.- Estatus
+.- Responsable
+.- Proyecto
+ """
+
+df_A1= df_analysis[["Riesgo / Detonador","Categoría","Estatus","Responsable","Proyecto"]]
+df_A1["Riesgo / Detonador"].value_counts().count()/df_A1.shape[0]*100 #Numbers uniques in the column Riesgos
+dict1= df_A1["Responsable"].value_counts()/df_A1.shape[0]*100 #Number of risks for area; It's a dictionary 
+
+keys=dict(dict1).keys()
+values=dict(dict1).values()
+
+"""Defining labels size 
+"""
+
+title=18
+label_text=14
+colors=['green','blue','orange','gray']
+
+#-------------------------------*************Make figures******************-------------------------------
+#Pie graph Incidencias
+fig1, ax1= plt.subplots(figsize=(4,4), subplot_kw=dict(aspect="equal"))
+ax1.pie(values,
+        labels=keys, autopct='%1.2f%%', 
+        shadow=True, textprops={'size':label_text},
+       colors=colors)
+
+plt.title('Incidencias', size=title)
+plt.axis('equal')
+
+plt.savefig('./imagenes/inc1.png', transparent=True)
+
+
+# #Bar graph 
+# plt.figure(figsize=(11,5))
+
+# #Plotting 
+# plt.bar(keys,values, width = 0.5,color=colors)
+
+# plt.xlabel('Área', size=label_text)
+# plt.ylabel('Frecuencia', size=label_text)
+# plt.title('Incidencias en el tiempo', size=title)
+# plt.savefig('.\imagenes\IncTiemp1.png', transparent=True)
+
+
 
