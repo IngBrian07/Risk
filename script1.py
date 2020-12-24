@@ -1,5 +1,6 @@
 import pandas as pd
 import matplotlib.pyplot as plt
+import dataframe_image as dfi
 
 #if __name__=="main":
 #Files paths
@@ -92,16 +93,33 @@ plt.axis('equal')
 plt.savefig('./imagenes/inc1.png', transparent=True)
 
 
-# #Bar graph 
-# plt.figure(figsize=(11,5))
+#***********Bar graph********
+plt.figure(figsize=(11,5))
 
-# #Plotting 
-# plt.bar(keys,values, width = 0.5,color=colors)
+#Plotting 
+plt.bar(keys,values, width = 0.5,color=colors)
 
-# plt.xlabel('Área', size=label_text)
-# plt.ylabel('Frecuencia', size=label_text)
-# plt.title('Incidencias en el tiempo', size=title)
-# plt.savefig('.\imagenes\IncTiemp1.png', transparent=True)
+plt.xlabel('Área', size=label_text)
+plt.ylabel('Frecuencia', size=label_text)
+plt.title('Incidencias en el tiempo', size=title)
+plt.savefig('.\imagenes\IncTiemp1.png', transparent=True)
 
 
+#***********Risk Table********
+G_bars=df_A1[["Riesgo / Detonador"]]
+dfi.export(G_bars, './imagenes/table_Risk.png')
 
+
+#***********Plotting a pie graph******** 
+dict2=df_A1['Proyecto'].value_counts().to_dict()
+keys2=dict2.keys()
+value2=dict2.values()
+
+
+fig, ax= plt.subplots(figsize=(4,4))
+
+ax.pie(value2, labels=keys2, autopct= '%1.2f%%',
+      shadow=True, textprops={'size':label_text},
+      colors=['brown','b'])
+
+plt.savefig('.\imagenes\Risk_by_proj.png', transparent=True)
