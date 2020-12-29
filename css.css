@@ -1,0 +1,87 @@
+*{
+    margin:0;
+    padding:0;
+}
+
+#logo{
+    margin:3%;
+    text-align:right;
+}
+
+#title{
+    text-align:center;
+    margin: 2% 0 2% 0px; 
+
+}
+
+.info_data{
+    text-align:right;
+    margin: 0 5% 0 0;
+}
+
+.container{
+    margin:5%;
+}
+
+
+/* ---------------First container--------------*/
+.box1{
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+    margin: 0 0 40px;
+}
+#T1{
+    text-align:center;
+    grid-column:1/3;
+
+}
+
+#pie1_total{
+    text-align:center;
+}
+
+#bar1{
+    text-align:center;
+}
+
+
+/* ---------------Second container--------------*/
+.Inc_time h2{
+    text-align:center;
+}
+
+#img2{
+    text-align:center;
+}
+
+
+/* ---------------Third container--------------*/
+.Proj_risk{
+    display:grid;
+    grid-template-columns:repeat(2, 1fr);
+}
+
+.Proj_risk h2{
+    text-align:center;
+    grid-column:1/3;
+}
+
+#img3-1{
+    text-align:center;
+}
+
+#img3-2{
+    text-align:center;
+}
+
+footer{
+    background: #252440;
+    text-align:center;
+    color:#ffffff;
+    padding: 2%;
+}
+
+div:hover{
+    border:1px solid #f1c40f;
+    
+}
