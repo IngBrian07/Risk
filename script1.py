@@ -77,37 +77,42 @@ values=dict(dict1).values()
 
 title=18
 label_text=14
-colors=['green','blue','orange','gray']
+colors=['green','blue','orange','gray','#33f9ff','#339cFF','#5e33ff']
 
 #-------------------------------*************Make figures******************-------------------------------
 #Pie graph Incidencias
-fig1, ax1= plt.subplots(figsize=(4,4), subplot_kw=dict(aspect="equal"))
-ax1.pie(values,
+ls_ax=[0.1 for x in values]
+explod=tuple(ls_ax)
+
+fig1, ax1= plt.subplots(figsize=(6,6), subplot_kw=dict(aspect="equal"))
+ax1.pie(values, explode=explod,
         labels=keys, autopct='%1.2f%%', 
-        shadow=True, textprops={'size':label_text},
-       colors=colors)
+        shadow=True, textprops={'size':label_text, 'backgroundcolor': 'w'},
+       colors=colors, labeldistance=0.9)
 
-plt.title('Incidencias', size=title)
-plt.axis('equal')
+plt.title('Incidencias', size=title, )
 
-plt.savefig('./imagenes/inc1.png', transparent=True)
+plt.savefig('./imagenes/inc1.png',transparent=True)
 
 
 #***********Bar graph********
-plt.figure(figsize=(11,5))
+#Bar graph 
+plt.figure(figsize=(8,4))
 
 #Plotting 
 plt.bar(keys,values, width = 0.5,color=colors)
 
 plt.xlabel('Área', size=label_text)
 plt.ylabel('Frecuencia', size=label_text)
-plt.title('Incidencias en el tiempo', size=title)
+plt.title('Incidencias oor área', size=title)
 plt.savefig('.\imagenes\IncTiemp1.png', transparent=True)
+
+
 
 
 #***********Risk Table********
 G_bars=df_A1[["Riesgo / Detonador"]]
-dfi.export(G_bars, './imagenes/table_Risk.png')
+dfi.export(G_bars.sample(10), './imagenes/table_Risk.png')
 
 
 #***********Plotting a pie graph******** 
@@ -120,6 +125,6 @@ fig, ax= plt.subplots(figsize=(4,4))
 
 ax.pie(value2, labels=keys2, autopct= '%1.2f%%',
       shadow=True, textprops={'size':label_text},
-      colors=['brown','b'])
+      colors=['brown','green'])
 
 plt.savefig('.\imagenes\Risk_by_proj.png', transparent=True)
